@@ -4,3 +4,5 @@ images
 .vscode
 __pycache__
 dlib-19.18
+.gitignore
+.pylintrc
