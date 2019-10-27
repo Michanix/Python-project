@@ -2,6 +2,7 @@ import face_recognition
 import cv2
 import numpy as np
 
+# source: https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py
 # my files
 
 # variables
