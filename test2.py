@@ -10,7 +10,7 @@ path_to_image = 'images/face.jpg'
 video_capture = cv2.VideoCapture(0)
 
 user_face = face_recognition.load_image_file(path_to_image)
-user_face_encoding = face_recognition.face_encodings(user_face, num_jitters=3)[0]
+user_face_encoding = face_recognition.face_encodings(user_face, num_jitters=1)[0]
 
 known_faces_encodings = [
     user_face_encoding
@@ -35,7 +35,7 @@ while True:
     if process_this_frame:
         # Find all the faces and face encodings in the current frame of video
         face_locations = face_recognition.face_locations(
-            rgb_small_frame, number_of_times_to_upsample=2, model="cnn")
+            rgb_small_frame, number_of_times_to_upsample=1, model="cnn")
         #face_locations = face_recognition.face_locations(rgb_small_frame)
         face_encodings = face_recognition.face_encodings(
             rgb_small_frame, face_locations)
