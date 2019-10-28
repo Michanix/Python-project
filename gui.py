@@ -13,17 +13,18 @@ class Application():
         self.current_image = None  # current image from the camera
 
         self.root = Tk()  # initialize root window
-        self.root.title("PyImageSearch PhotoBooth")  # set window title
+        self.root.title("Photo Booth")  # set window title
         # self.destructor function gets fired when the window is closed
         self.root.protocol('WM_DELETE_WINDOW', self.destructor)
 
         self.panel = ttk.Label(self.root)  # initialize image panel
-        self.panel.grid(padx=10, pady=10)
+        self.panel.grid(column=0, row=0, columnspan=2, rowspan=1, padx=10, pady=10)
 
         # create a button, that when pressed, will take the current frame and save it to file
         btn = ttk.Button(self.root, text="Snapshot!", command=self.take_snapshot)
-        btn.grid(padx=10, pady=10)
-
+        btn.grid(column=0, row=2, pady=5)
+        btn2 = ttk.Button(self.root, text='Something')
+        btn2.grid(column=1, row=2, pady=5)
         # start a self.video_loop that constantly pools the video sensor
         # for the most recently read frame
         self.video_loop()
@@ -32,7 +33,7 @@ class Application():
         """ Get frame from the video stream and show it in Tkinter """
         ret, frame = self.capture.read()  # read frame from video stream
         if ret:  # frame captured without any errors
-            cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # convert colors from BGR to RGBA
+            cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # convert colors from BGR to RGB
             self.current_image = Image.fromarray(cv2image)  # convert image for PIL
             imgtk = ImageTk.PhotoImage(image=self.current_image)  # convert image for tkinter
             self.panel.imgtk = imgtk  # anchor imgtk so it does not be deleted by garbage-collector
