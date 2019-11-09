@@ -1,10 +1,10 @@
 from tkinter import *
-from tkinter import ttk, filedialog
+from tkinter import ttk, filedialog, messagebox
 import os
 
 # my imports
 from takepicture import TakePicture
-
+from test2 import find_and_recognize
 
 class Main:
 
@@ -28,7 +28,9 @@ class Main:
             self.mainframe, text='Upload picture', command=self.upload_picture)
         upload_image_btn.grid(column=3, row=2)
 
-        # todo: another button "Unlock"
+        unlock_btn = ttk.Button(
+            self.mainframe, text='Unlock', command=self.unlock)
+        unlock_btn.grid(column=4, row=2, padx=10, pady=10)
 
     def upload_picture(self):
         path = os.getcwd
@@ -37,6 +39,14 @@ class Main:
 
     def take_picture(self):
         return TakePicture()
+    
+    def unlock(self):
+        messagebox.showinfo(message='Processing...')
+        unlock = find_and_recognize()
+        if unlock:
+            print('Access granted.')
+        else:
+            print('Access denied.')
 
 
 print('Start programm...')

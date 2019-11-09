@@ -5,30 +5,29 @@ import numpy as np
 # source: https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py
 # my files
 
-# variables
-path_to_image = 'images/face.jpg'
-video_capture = cv2.VideoCapture(0)
+def find_and_recognize(state=False):
 
-user_face = face_recognition.load_image_file(path_to_image)
-user_face_encoding = face_recognition.face_encodings(user_face, num_jitters=1)[0]
+    path_to_image = 'images/face.jpg'
+    video_capture = cv2.VideoCapture(0)
 
-known_faces_encodings = [
-    user_face_encoding
-]
+    user_face = face_recognition.load_image_file(path_to_image)
+    user_face_encoding = face_recognition.face_encodings(user_face, num_jitters=1)[0]
 
-known_face_names = [
-    "Mihhail"
-]
+    known_faces_encodings = [
+        user_face_encoding
+    ]
 
-face_loc = []
-face_encodings = []
-face_names = []
+    known_face_names = [
+        "Mihhail"
+    ]
 
-def main():
-
+    face_loc = []
+    face_encodings = []
+    face_names = []
     process_this_frame = True
+    
+    while state != True:
 
-    while True:
         ret, frame = video_capture.read()
 
         small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
@@ -62,12 +61,15 @@ def main():
                 best_match_index = np.argmin(face_distances)
                 if matches[best_match_index]:
                     name = known_face_names[best_match_index]
-                    print('found you!')
+                    state = True
+                    print(state)
                 else:
-                    print('unknown!')
+                    state = False
+                    print(state)
+                    
 
                 face_names.append(name)
-
+            break
         process_this_frame = not process_this_frame
 
         # Display the results
@@ -93,14 +95,17 @@ def main():
         
         # Display the resulting image
         cv2.imshow('Video', frame)
-        '''
+        
         # Hit 'q' on the keyboard to quit!
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
-
+        '''
     # Release handle to the webcam
+
     video_capture.release()
     cv2.destroyAllWindows()
+    
+    return state
 
 if __name__ == '__main__':
-    main()
+   find_and_recognize()
