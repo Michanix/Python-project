@@ -64,10 +64,8 @@ def find_and_recognize(state=False):
                 if matches[best_match_index]:
                     name = known_face_names[best_match_index]
                     state = True
-                    print(state)
                 else:
                     state = False
-                    print(state)
 
                 face_names.append(name)
             break

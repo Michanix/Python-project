@@ -1,4 +1,5 @@
-from tkinter import *
+# import only neccessary stuff
+from tkinter import Frame, Label, Button, Tk
 from tkinter import ttk, filedialog, messagebox
 import os
 
@@ -19,7 +20,7 @@ class Main:
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)
 
-        ttk.Label(self.mainframe).grid(column=2, row=2, sticky=(W, E))
+        ttk.Label(self.mainframe).grid(column=2, row=2)
         take_pic_btn = ttk.Button(
             self.mainframe, text='Take picture', command=self.take_picture)
         take_pic_btn.grid(
