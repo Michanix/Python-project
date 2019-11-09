@@ -4,7 +4,7 @@ import os
 
 # my imports
 from takepicture import TakePicture
-from test2 import find_and_recognize
+from findandrecognize import find_and_recognize
 
 class Main:
 
@@ -41,13 +41,11 @@ class Main:
         return TakePicture()
     
     def unlock(self):
-        messagebox.showinfo(message='Processing...')
         unlock = find_and_recognize()
         if unlock:
-            print('Access granted.')
+            messagebox.showinfo(message='Access granted.')
         else:
-            print('Access denied.')
-
+            messagebox.showinfo(message='Access denied.')
 
 print('Start programm...')
 main = Main()

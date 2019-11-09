@@ -75,6 +75,7 @@ def find_and_recognize(state=False):
         # Display the results
         # uncomment next block of code if you want to see face detection in live action
         # for my purposes it wasnt needed.
+        # and run this file seperatly.
         '''
         for (top, right, bottom, left), name in zip(face_locations, face_names):
             # Scale back up face locations since the frame we detected in was scaled to 1/4 size
