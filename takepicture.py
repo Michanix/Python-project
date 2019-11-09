@@ -5,7 +5,7 @@ from time import sleep
 import cv2
 
 # thanks to stackoverflow: https://stackoverflow.com/questions/32342935/using-opencv-with-tkinter#32362559
-class Application():
+class TakePicture():
     def __init__(self):
         """ Initialize application which uses OpenCV + Tkinter. It displays
             a video stream in a Tkinter window and stores current snapshot on disk """
@@ -19,12 +19,9 @@ class Application():
 
         self.panel = ttk.Label(self.root)  # initialize image panel
         self.panel.grid(column=0, row=0, columnspan=2, rowspan=1, padx=10, pady=10)
-
         # create a button, that when pressed, will take the current frame and save it to file
-        btn = ttk.Button(self.root, text="Snapshot!", command=self.take_snapshot)
+        btn = ttk.Button(self.root, text="Cheese!", command=self.take_snapshot)
         btn.grid(column=0, row=2, pady=5)
-        btn2 = ttk.Button(self.root, text='Something')
-        btn2.grid(column=1, row=2, pady=5)
         # start a self.video_loop that constantly pools the video sensor
         # for the most recently read frame
         self.video_loop()
@@ -47,7 +44,7 @@ class Application():
         path_to_save = 'images/{}'.format(image_name)
         self.current_image.save(path_to_save)  # save image as jpeg file
         print("[INFO] saved {}".format(image_name))
-
+    
     def destructor(self):
         """ Destroy the root object and release all resources """
         print("[INFO] closing...")
@@ -58,6 +55,7 @@ class Application():
 # construct the argument parse and parse the arguments
 
 # start the app
-print("[INFO] starting...")
-pba = Application()
-pba.root.mainloop()
+if __name__ == '_main':
+    print("[INFO] starting...")
+    pba = TakePicture()
+    pba.root.mainloop()
