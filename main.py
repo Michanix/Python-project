@@ -2,10 +2,12 @@
 from tkinter import Frame, Label, Button, Tk
 from tkinter import ttk, filedialog, messagebox
 import os
+import getpass
 
 # my imports
 from takepicture import TakePicture
 from findandrecognize import find_and_recognize
+from myfunctions import get_user_path
 
 
 class Main:
@@ -35,9 +37,10 @@ class Main:
         unlock_btn.grid(column=4, row=2, padx=10, pady=10)
 
     def upload_picture(self):
-        path = os.getcwd
+        path = get_user_path()
         image = filedialog.askopenfilename(
             initialdir=path, title="Select file", filetypes=(("jpeg files", "*.jpg"), ("all files", "*.*")))
+        return image
 
     def take_picture(self):
         return TakePicture()

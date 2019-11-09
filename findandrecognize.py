@@ -6,9 +6,9 @@ import numpy as np
 # my files
 
 
-def find_and_recognize(state=False):
+def find_and_recognize(state=False, path='images/face.jpg'):
 
-    path_to_image = 'images/face.jpg'
+    path_to_image = path
     video_capture = cv2.VideoCapture(0)
 
     user_face = face_recognition.load_image_file(path_to_image)
