@@ -5,8 +5,9 @@ import os
 # my imports
 from takepicture import TakePicture
 
-class Main():
-    
+
+class Main:
+
     def __init__(self):
         self.root = Tk()
         self.root.title("Main programm")
@@ -18,9 +19,14 @@ class Main():
         self.root.rowconfigure(0, weight=1)
 
         ttk.Label(self.mainframe).grid(column=2, row=2, sticky=(W, E))
-        ttk.Button(self.mainframe, text='Take picture', command=self.take_picture).grid(
+        take_pic_btn = ttk.Button(
+            self.mainframe, text='Take picture', command=self.take_picture)
+        take_pic_btn.grid(
             column=1, row=2, padx=10, pady=10)
-        ttk.Button(self.mainframe, text='Upload picture', command=self.upload_picture).grid(column=3, row=2)
+
+        upload_image_btn = ttk.Button(
+            self.mainframe, text='Upload picture', command=self.upload_picture)
+        upload_image_btn.grid(column=3, row=2)
 
     def upload_picture(self):
         path = os.getcwd
@@ -28,8 +34,10 @@ class Main():
             initialdir=path, title="Select file", filetypes=(("jpeg files", "*.jpg"), ("all files", "*.*")))
 
     def take_picture(self):
-        image = TakePicture()
-        image.take_snapshot()
+        return TakePicture()
 
+
+print('Start programm...')
 main = Main()
 main.root.mainloop()
+print('Terminated.')

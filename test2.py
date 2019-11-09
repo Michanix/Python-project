@@ -68,6 +68,9 @@ def main():
         process_this_frame = not process_this_frame
 
         # Display the results
+        # uncomment next block of code if you want to see face detection in live action
+        # for my purposes it wasnt needed.
+        '''
         for (top, right, bottom, left), name in zip(face_locations, face_names):
             # Scale back up face locations since the frame we detected in was scaled to 1/4 size
             top *= 4
@@ -84,10 +87,10 @@ def main():
             font = cv2.FONT_HERSHEY_DUPLEX
             cv2.putText(frame, name, (left + 6, bottom - 6),
                         font, 1.0, (255, 255, 255), 1)
-
+        
         # Display the resulting image
         cv2.imshow('Video', frame)
-
+        '''
         # Hit 'q' on the keyboard to quit!
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
