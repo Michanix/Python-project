@@ -6,6 +6,7 @@ import os
 from takepicture import TakePicture
 from findandrecognize import find_and_recognize
 
+
 class Main:
 
     def __init__(self):
@@ -39,13 +40,14 @@ class Main:
 
     def take_picture(self):
         return TakePicture()
-    
+
     def unlock(self):
         unlock = find_and_recognize()
         if unlock:
             messagebox.showinfo(message='Access granted.')
         else:
             messagebox.showinfo(message='Access denied.')
+
 
 print('Start programm...')
 main = Main()

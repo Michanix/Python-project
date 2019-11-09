@@ -5,13 +5,15 @@ import numpy as np
 # source: https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py
 # my files
 
+
 def find_and_recognize(state=False):
 
     path_to_image = 'images/face.jpg'
     video_capture = cv2.VideoCapture(0)
 
     user_face = face_recognition.load_image_file(path_to_image)
-    user_face_encoding = face_recognition.face_encodings(user_face, num_jitters=1)[0]
+    user_face_encoding = face_recognition.face_encodings(
+        user_face, num_jitters=1)[0]
 
     known_faces_encodings = [
         user_face_encoding
@@ -25,7 +27,7 @@ def find_and_recognize(state=False):
     face_encodings = []
     face_names = []
     process_this_frame = True
-    
+
     while state != True:
 
         ret, frame = video_capture.read()
@@ -66,7 +68,6 @@ def find_and_recognize(state=False):
                 else:
                     state = False
                     print(state)
-                    
 
                 face_names.append(name)
             break
@@ -105,8 +106,9 @@ def find_and_recognize(state=False):
 
     video_capture.release()
     cv2.destroyAllWindows()
-    
+
     return state
 
+
 if __name__ == '__main__':
-   find_and_recognize()
+    find_and_recognize()
