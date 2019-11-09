@@ -19,9 +19,11 @@ def find_and_recognize(state=False, path='images/face.jpg'):
         user_face_encoding
     ]
 
+    '''
     known_face_names = [
         "Mihhail"
     ]
+    ''' 
 
     face_loc = []
     face_encodings = []
@@ -62,12 +64,12 @@ def find_and_recognize(state=False, path='images/face.jpg'):
                     known_faces_encodings, face_encoding)
                 best_match_index = np.argmin(face_distances)
                 if matches[best_match_index]:
-                    name = known_face_names[best_match_index]
+                    # name = known_face_names[best_match_index]
                     state = True
                 else:
                     state = False
 
-                face_names.append(name)
+                # face_names.append(name)
             break
         process_this_frame = not process_this_frame
 

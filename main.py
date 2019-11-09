@@ -29,14 +29,14 @@ class Main:
             column=1, row=2, padx=10, pady=10)
 
         upload_image_btn = ttk.Button(
-            self.mainframe, text='Upload picture', command=self.upload_picture)
+            self.mainframe, text='Upload existing picture', command=self.upload_existing_picture)
         upload_image_btn.grid(column=3, row=2)
 
         unlock_btn = ttk.Button(
             self.mainframe, text='Unlock', command=self.unlock)
         unlock_btn.grid(column=4, row=2, padx=10, pady=10)
 
-    def upload_picture(self):
+    def upload_existing_picture(self):
         path = get_user_path()
         image = filedialog.askopenfilename(
             initialdir=path, title="Select file", filetypes=(("jpeg files", "*.jpg"), ("all files", "*.*")))
