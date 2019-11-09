@@ -62,6 +62,9 @@ def main():
                 best_match_index = np.argmin(face_distances)
                 if matches[best_match_index]:
                     name = known_face_names[best_match_index]
+                    print('found you!')
+                else:
+                    print('unknown!')
 
                 face_names.append(name)
 

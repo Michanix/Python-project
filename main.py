@@ -28,6 +28,8 @@ class Main:
             self.mainframe, text='Upload picture', command=self.upload_picture)
         upload_image_btn.grid(column=3, row=2)
 
+        # todo: another button "Unlock"
+
     def upload_picture(self):
         path = os.getcwd
         image = filedialog.askopenfilename(
