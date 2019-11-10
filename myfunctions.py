@@ -1,9 +1,30 @@
-import getpass
+from getpass import getuser
+from tkinter import messagebox, filedialog
+from takepicture import TakePicture
+from findandrecognize import find_and_recognize
 
 def get_user_path():
     username = getpass.getuser()
     path = '/home/{}/Desktop'.format(username)
     return path
 
-if __name__ == "__main__":
-    get_user_path()
+def upload_existing_picture():
+    path = get_user_path()
+    image = filedialog.askopenfilename(
+            initialdir=path, title="Select file", filetypes=(("jpeg files", "*.jpg"), ("all files", "*.*")))
+    return image
+
+def take_picture():
+    return TakePicture()
+
+def unlock():
+    try:
+        unlock = find_and_recognize()
+    except:
+        print('Something went wrong...')
+    else:
+        if unlock:
+            messagebox.showinfo(message='Access granted.')
+        else:
+            messagebox.showinfo(message='Access denied.')
+

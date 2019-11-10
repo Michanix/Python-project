@@ -1,15 +1,12 @@
 # import only neccessary stuff
 from tkinter import Frame, Label, Button, Tk
-from tkinter import ttk, filedialog, messagebox
-import os
-import getpass
-
+from tkinter import ttk
+import time
 # my imports
-from takepicture import TakePicture
-from findandrecognize import find_and_recognize
-from myfunctions import get_user_path
+from myfunctions import get_user_path, take_picture, upload_existing_picture, unlock
 
-
+start = time.time()
+# Do I need class, tho ?
 class Main:
 
     def __init__(self):
@@ -24,36 +21,20 @@ class Main:
 
         ttk.Label(self.mainframe).grid(column=2, row=2)
         take_pic_btn = ttk.Button(
-            self.mainframe, text='Take picture', command=self.take_picture)
+            self.mainframe, text='Take picture', command=take_picture)
         take_pic_btn.grid(
             column=1, row=2, padx=10, pady=10)
 
         upload_image_btn = ttk.Button(
-            self.mainframe, text='Upload existing picture', command=self.upload_existing_picture)
+            self.mainframe, text='Upload existing picture', command=upload_existing_picture)
         upload_image_btn.grid(column=3, row=2)
 
         unlock_btn = ttk.Button(
-            self.mainframe, text='Unlock', command=self.unlock)
+            self.mainframe, text='Unlock', command=unlock)
         unlock_btn.grid(column=4, row=2, padx=10, pady=10)
-
-    def upload_existing_picture(self):
-        path = get_user_path()
-        image = filedialog.askopenfilename(
-            initialdir=path, title="Select file", filetypes=(("jpeg files", "*.jpg"), ("all files", "*.*")))
-        return image
-
-    def take_picture(self):
-        return TakePicture()
-
-    def unlock(self):
-        unlock = find_and_recognize()
-        if unlock:
-            messagebox.showinfo(message='Access granted.')
-        else:
-            messagebox.showinfo(message='Access denied.')
-
-
+    
 print('Start programm...')
 main = Main()
 main.root.mainloop()
 print('Terminated.')
+print('second ', (time.time() - start))

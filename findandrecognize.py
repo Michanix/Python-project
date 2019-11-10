@@ -5,8 +5,9 @@ import numpy as np
 # source: https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py
 
 '''The code from source link was modified for my needs.
-    If you want to see how to works the original code, chech the source link.
+    If you want to see how works the original code, check the source link.
 '''
+
 
 def find_and_recognize(path='images/face.jpg'):
 
@@ -14,15 +15,15 @@ def find_and_recognize(path='images/face.jpg'):
 
     user_face = face_recognition.load_image_file(path)
     user_face_encoding = face_recognition.face_encodings(
-        user_face, num_jitters=1)[0]
+        user_face, num_jitters=30)[0]
 
     known_faces_encodings = [
         user_face_encoding
-    ] 
+    ]
 
     face_encodings = []
     process_this_frame = True
-    state = False # state of the match. If True match is found 
+    state = False  # state of the match. If True match is found
 
     while state != True:
 
@@ -35,7 +36,7 @@ def find_and_recognize(path='images/face.jpg'):
         if process_this_frame:
             # Find all the faces and face encodings in the current frame of video
             face_locations = face_recognition.face_locations(
-                rgb_small_frame, number_of_times_to_upsample=1, model="cnn")
+                rgb_small_frame, number_of_times_to_upsample=2, model="cnn")
             face_encodings = face_recognition.face_encodings(
                 rgb_small_frame, face_locations)
 
@@ -66,4 +67,4 @@ def find_and_recognize(path='images/face.jpg'):
 
 
 if __name__ == '__main__':
-    print(find_and_recognize())
+    find_and_recognize()
