@@ -2,11 +2,11 @@ import face_recognition
 import cv2
 import numpy as np
 
-# source: https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py
+# source: 
+# https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py
 
 '''The code from source link was modified for my needs.
-    If you want to see how works the original code, check the source link.
-'''
+    If you want to see how works the original code, check the source link.'''
 
 
 def find_and_recognize(path='images/face.jpg'):

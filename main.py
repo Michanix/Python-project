@@ -6,7 +6,6 @@ import time
 from controllers import take_picture, upload_existing_picture, unlock
 
 start = time.time()
-# Do I need class, tho ?
 class Main:
 
     def __init__(self):
@@ -32,9 +31,8 @@ class Main:
         unlock_btn = ttk.Button(
             self.mainframe, text='Unlock', command=unlock)
         unlock_btn.grid(column=4, row=2, padx=10, pady=10)
-   
 print('Start programm...')
 main = Main()
 main.root.mainloop()
 print('Terminated.')
-print('second ', (time.time() - start))
+print('second\n', (time.time() - start))
