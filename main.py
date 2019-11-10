@@ -1,9 +1,9 @@
 # import only neccessary stuff
-from tkinter import Frame, Label, Button, Tk
+from tkinter import Tk
 from tkinter import ttk
 import time
 # my imports
-from controllers import get_user_path, take_picture, upload_existing_picture, unlock
+from controllers import take_picture, upload_existing_picture, unlock
 
 start = time.time()
 # Do I need class, tho ?
@@ -32,7 +32,7 @@ class Main:
         unlock_btn = ttk.Button(
             self.mainframe, text='Unlock', command=unlock)
         unlock_btn.grid(column=4, row=2, padx=10, pady=10)
-    
+   
 print('Start programm...')
 main = Main()
 main.root.mainloop()

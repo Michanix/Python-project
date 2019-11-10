@@ -1,10 +1,10 @@
-from PIL import Image, ImageTk
-from tkinter import Tk, Label, Button
 from tkinter import ttk, Toplevel
 from time import sleep
+from PIL import Image, ImageTk
 import cv2
 
-# thanks to stackoverflow: https://stackoverflow.com/questions/32342935/using-opencv-with-tkinter#32362559
+# thanks to stackoverflow:
+# https://stackoverflow.com/questions/32342935/using-opencv-with-tkinter#32362559
 
 
 class TakePicture:
