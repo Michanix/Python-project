@@ -3,32 +3,26 @@ import cv2
 import numpy as np
 
 # source: https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py
-# my files
 
+'''The code from source link was modified for my needs.
+    If you want to see how to works the original code, chech the source link.
+'''
 
-def find_and_recognize(state=False, path='images/face.jpg'):
+def find_and_recognize(path='images/face.jpg'):
 
-    path_to_image = path
     video_capture = cv2.VideoCapture(0)
 
-    user_face = face_recognition.load_image_file(path_to_image)
+    user_face = face_recognition.load_image_file(path)
     user_face_encoding = face_recognition.face_encodings(
         user_face, num_jitters=1)[0]
 
     known_faces_encodings = [
         user_face_encoding
-    ]
+    ] 
 
-    '''
-    known_face_names = [
-        "Mihhail"
-    ]
-    ''' 
-
-    face_loc = []
     face_encodings = []
-    face_names = []
     process_this_frame = True
+    state = False # state of the match. If True match is found 
 
     while state != True:
 
@@ -42,66 +36,27 @@ def find_and_recognize(state=False, path='images/face.jpg'):
             # Find all the faces and face encodings in the current frame of video
             face_locations = face_recognition.face_locations(
                 rgb_small_frame, number_of_times_to_upsample=1, model="cnn")
-            #face_locations = face_recognition.face_locations(rgb_small_frame)
             face_encodings = face_recognition.face_encodings(
                 rgb_small_frame, face_locations)
 
-            face_names = []
             for face_encoding in face_encodings:
 
                 # See if the face is a match for the known face(s)
                 matches = face_recognition.compare_faces(
                     known_faces_encodings, face_encoding, tolerance=0.6)
-                name = "Unknown"
-
-                # # If a match was found in known_face_encodings, just use the first one.
-                # if True in matches:
-                #     first_match_index = matches.index(True)
-                #     name = known_face_names[first_match_index]
 
                 # Or instead, use the known face with the smallest distance to the new face
                 face_distances = face_recognition.face_distance(
                     known_faces_encodings, face_encoding)
                 best_match_index = np.argmin(face_distances)
                 if matches[best_match_index]:
-                    # name = known_face_names[best_match_index]
                     state = True
                 else:
                     state = False
 
-                # face_names.append(name)
             break
         process_this_frame = not process_this_frame
 
-        # Display the results
-        # uncomment next block of code if you want to see face detection in live action
-        # for my purposes it wasnt needed.
-        # and run this file seperatly.
-        '''
-        for (top, right, bottom, left), name in zip(face_locations, face_names):
-            # Scale back up face locations since the frame we detected in was scaled to 1/4 size
-            top *= 4
-            right *= 4
-            bottom *= 4
-            left *= 4
-
-            # Draw a box around the face
-            cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
-
-            # Draw a label with a name below the face
-            cv2.rectangle(frame, (left, bottom - 35),
-                        (right, bottom), (0, 0, 255), cv2.FILLED)
-            font = cv2.FONT_HERSHEY_DUPLEX
-            cv2.putText(frame, name, (left + 6, bottom - 6),
-                        font, 1.0, (255, 255, 255), 1)
-        
-        # Display the resulting image
-        cv2.imshow('Video', frame)
-        
-        # Hit 'q' on the keyboard to quit!
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-        '''
     # Release handle to the webcam
 
     video_capture.release()
@@ -111,4 +66,4 @@ def find_and_recognize(state=False, path='images/face.jpg'):
 
 
 if __name__ == '__main__':
-    find_and_recognize()
+    print(find_and_recognize())
