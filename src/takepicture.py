@@ -1,3 +1,4 @@
+import pathlib
 from tkinter import ttk, Toplevel
 from time import sleep
 from PIL import Image, ImageTk
@@ -55,6 +56,7 @@ class TakePicture:
     def take_snapshot(self):
         """ Take snapshot and save it to the file """
         sleep(1)  # add some effect to indicate that picture been taken
+        pathlib.Path('images/').mkdir(exist_ok=True)# check if images dir exists, if not create
         image_name = 'face.jpg'  # construct filename
         path_to_save = 'images/{}'.format(image_name)  # where to save image
         self.current_image.save(path_to_save)  # save image as jpeg file
