@@ -3,7 +3,7 @@ from tkinter import Frame, Label, Button, Tk
 from tkinter import ttk
 import time
 # my imports
-from myfunctions import get_user_path, take_picture, upload_existing_picture, unlock
+from controllers import get_user_path, take_picture, upload_existing_picture, unlock
 
 start = time.time()
 # Do I need class, tho ?
