@@ -1,4 +1,4 @@
-<h2>Python project for Computer Programming course. Face recognition project written in Python.</h2>
+<h2>Python project for Computer Programming course</h2>
 
 <h2>Requirements:</h2>
 
@@ -8,5 +8,7 @@
 
 <h2>Install process:</h2>
 
-If requirements are satisfied, just run the next command:<br>
+If requirements are satisfied, just run the next command to install required libraries/packages:<br>
 <code>pip install -r requirements.txt</code>
+
+And run the program <code>python3 main.py</code>
