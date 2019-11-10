@@ -8,7 +8,7 @@
 
 <h2>Install process:</h2>
 
-If requirements are satisfied, just clone the repository and run the next command to install required libraries/packages:<br>
+If requirements are satisfied, just clone the repository and run the next command inside cloned project to install required libraries/packages:<br>
 <code>pip install -r requirements.txt</code>
 
-And run the program <code>python3 main.py</code>
+And then run the program <code>python3 main.py</code>
