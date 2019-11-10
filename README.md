@@ -8,5 +8,5 @@
 
 <h2>Install process:</h2>
 
-If requirements are satisfied, just run the next command:
-pip install -r requirements.txt
+If requirements are satisfied, just run the next command:<br>
+<code>pip install -r requirements.txt</code>
