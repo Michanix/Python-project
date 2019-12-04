@@ -3,7 +3,8 @@ from tkinter import Tk
 from tkinter import ttk
 import time
 # my imports
-from controllers import take_picture, upload_existing_picture, unlock
+from controllers import use_existing_image, unlock
+from takepicture import TakePicture
 
 start = time.time()
 class Main:
@@ -22,13 +23,13 @@ class Main:
         # button to take picture
         # call method take_picture from takepicture.py
         take_pic_btn = ttk.Button(
-            self.mainframe, text='Take picture', command=take_picture)
+            self.mainframe, text='Take picture', command=TakePicture)
         take_pic_btn.grid(
             column=1, row=2, padx=10, pady=10)
         # upload an image button
         # call method upload_existing_picture from controllers.py
         upload_image_btn = ttk.Button(
-            self.mainframe, text='Upload existing picture', command=upload_existing_picture)
+            self.mainframe, text='Upload existing picture', command=use_existing_image)
         upload_image_btn.grid(column=3, row=2)
         # button to test, if image is satisfy
         # call unlock method from controllers.py

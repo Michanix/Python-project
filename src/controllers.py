@@ -3,7 +3,6 @@ from getpass import getuser
 from tkinter import filedialog, messagebox
 
 from findandrecognize import find_and_recognize
-from takepicture import TakePicture
 
 path_to_image = []
 
@@ -13,17 +12,13 @@ def get_user_path():
     return path
 
 
-def upload_existing_picture():
+def use_existing_image():
     path = get_user_path()
     image = filedialog.askopenfilename(
         initialdir=path, title="Select file",
         filetypes=(("jpeg files", "*.jpg"), ("all files", "*.*")))
     image_path = os.path.realpath(image)
     path_to_image.append(str(image_path))
-
-def take_picture():
-    return TakePicture()
-
 
 def unlock():
     if len(path_to_image) == 0:
