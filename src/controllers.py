@@ -18,7 +18,7 @@ def upload_existing_picture():
         initialdir=path, title="Select file",
         filetypes=(("jpeg files", "*.jpg"), ("all files", "*.*")))
     image_path = os.path.realpath(image)
-    return messagebox.showinfo(message='This function does not work completly. Work in progress')
+    return image_path
 
 
 def take_picture():
