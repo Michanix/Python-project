@@ -29,7 +29,7 @@ class UI:
         self.folder = ttk.Entry(self.mainframe, width=90, text='')
         # Buttons
         self.browse = ttk.Button(
-            self.mainframe, text='Browse...', command=self.browse)
+            self.mainframe, text='Browse...', command=self.get_folder_path)
         # upload an image button
         # call method upload_existing_picture from controllers.py
         self.upload_image_btn = ttk.Button(
@@ -65,7 +65,7 @@ class UI:
         self.root.destroy()
         print('Terminated.')
 
-    def browse(self):
+    def get_folder_path(self):
         user_desk = '/home/{}/Desktop'.format(getuser())
         self.browse = filedialog.askdirectory(
             initialdir=user_desk, title='Select folder')
