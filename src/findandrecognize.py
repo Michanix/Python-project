@@ -10,8 +10,6 @@ import numpy as np
 
 
 def find_and_recognize(path='images/face.jpg'):
-    if path is None:
-        print('No image')
     video_capture = cv2.VideoCapture(0)
 
     user_face = face_recognition.load_image_file(path)
