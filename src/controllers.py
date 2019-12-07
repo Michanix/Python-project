@@ -1,19 +1,12 @@
 import os
-from getpass import getuser
 from tkinter import filedialog, messagebox
 
 from findandrecognize import find_and_recognize
 
 path_to_image = []
 
-def get_user_path():
-    username = getuser()
-    path = '/home/{}/Desktop'.format(username)
-    return path
-
-
 def use_existing_image():
-    path = get_user_path()
+    path = os.getcwd
     image = filedialog.askopenfilename(
         initialdir=path, title="Select file",
         filetypes=(("jpeg files", "*.jpg"), ("all files", "*.*")))
