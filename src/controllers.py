@@ -24,8 +24,8 @@ def unlock():
     if len(path_to_image) == 0:
         try:
             access = find_and_recognize()
-        except:
-            print('Something went wrong.')
+        except FileNotFoundError as err:
+            messagebox.showinfo(message=err)
         else:
             if access:
                 messagebox.showinfo(message='Access granted.')
@@ -34,8 +34,8 @@ def unlock():
     else:
         try:
             access = find_and_recognize(path_to_image[0])
-        except:
-            print('Something went wrong 2.')
+        except FileNotFoundError as err:
+            messagebox.showinfo(message=err)
         else:
             if access:
                 messagebox.showinfo(message='Access granted.')
