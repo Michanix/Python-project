@@ -1,8 +1,7 @@
-import os
 from getpass import getuser
 # import only neccessary stuff
 from tkinter import Tk
-from tkinter import ttk
+from tkinter import ttk, Listbox
 from tkinter import filedialog
 
 # my imports
@@ -18,15 +17,20 @@ class UI:
 
         # Main window
         self.mainframe = ttk.Frame(
-            self.root, padding="4 4 12 12", width=200, height=200)
+            self.root, padding="4 4 12 12", width=480, height=320)
         self.mainframe.grid(column=0, row=0)
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)
+
         # Labels
         self.folder_label = ttk.Label(self.mainframe, text='Choose folder:')
         self.test_label = ttk.Label(self.mainframe, text='Test your image before applying changes')
+        self.listbox_label = ttk.Label(self.mainframe, text='List of secured folder')
         # Entries
-        self.folder = ttk.Entry(self.mainframe, width=90, text='')
+        self.folder_entry = ttk.Entry(self.mainframe, width=90, text='')
+        # List box
+        self.folders_listbox = Listbox(self.mainframe, width=90)
+
         # Buttons
         self.browse = ttk.Button(
             self.mainframe, text='Browse...', command=self.get_folder_path)
@@ -45,22 +49,29 @@ class UI:
         # exit button
         self.exit_btn = ttk.Button(
             self.mainframe, text='Exit', command=self.close_program)
+        # delete item from list box
+        self.delete_item = ttk.Button(self.mainframe, text='Remove', 
+            command=lambda folders_listbox=self.folders_listbox: folders_listbox.delete(0)
+            )
         # Grigds
-        # folder grids
+        # folder grid
         self.folder_label.grid(column=1, row=1)
-        self.folder.grid(column=2, row=1)
+        self.folder_entry.grid(column=2, row=1)
         # browser button grid
         self.browse.grid(column=3, row=1, padx=10, pady=10)
         # use existing image grid
-        self.upload_image_btn.grid(column=2, row=2)
+        self.upload_image_btn.grid(column=1, row=2)
         # take picture grid
-        self.take_pic_btn.grid(column=2, row=3, padx=10, pady=10)
+        self.take_pic_btn.grid(column=1, row=3, padx=10, pady=10)
         # test button grid
-        self.test_label.grid(column=1, row=4)
-        self.test_btn.grid(column=2, row=4)
+        self.test_btn.grid(column=1, row=4)
         # exit button
-        self.exit_btn.grid(column=2, row=5, padx=10, pady=10)
-
+        self.exit_btn.grid(column=1, row=5, padx=10, pady=10)
+        # list box grid
+        self.listbox_label.grid(column=2, row=2)
+        self.folders_listbox.grid(column=2, row=3)
+        self.delete_item.grid(column=2, row=4)
+        
     def close_program(self):
         self.root.destroy()
         print('Terminated.')
@@ -69,9 +80,9 @@ class UI:
         user_desk = '/home/{}/Desktop'.format(getuser())
         self.browse = filedialog.askdirectory(
             initialdir=user_desk, title='Select folder')
-        self.folder.delete(0, 'end')
-        self.folder.insert(0, self.browse)
-
+        self.folder_entry.delete(0, 'end')
+        self.folder_entry.insert(0, self.browse)
+        self.folders_listbox.insert(1, self.browse)
 
 print('Start programm...')
 main = UI()
