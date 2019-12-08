@@ -69,10 +69,17 @@ class UI:
         self.folder_entry.delete(0, 'end')
         self.folder_entry.insert(0, self.browse)
 
-    def write_paths_to_file(self):
+    def write_path_to_file(self):
         path_to_save = os.path.join(os.getcwd(), 'paths.txt')
         with open(path_to_save, 'w') as f:
             f.write(self.browse)
+
+    def remove_path_from_file(self):
+        with open('paths.txt', 'r+') as f:
+            paths = f.readlines()
+            if self.browse in paths:
+                paths.remove(self.browse)
+            f.write(paths)
 
     def lock_directory(self):
         if self.browse in self.set_of_paths:
@@ -82,7 +89,7 @@ class UI:
             messagebox.showinfo(message='Folder is locked')
             call(['chmod', '-R', '101', self.folders_listbox.get('active')])
             self.set_of_paths.add(self.browse)
-            self.write_paths_to_file()
+            self.write_path_to_file()
 
     def use_existing_image(self):
         path = os.getcwd
@@ -103,6 +110,7 @@ class UI:
                     call(['chmod', '-R', '777', self.folders_listbox.get('active')])
                     self.folders_listbox.delete(0)
                     self.set_of_paths.discard(self.browse)
+                    self.remove_path_from_file()
                     messagebox.showinfo(message='Access granted.')
                 else:
                     messagebox.showinfo(message='Access denied.')
@@ -116,6 +124,7 @@ class UI:
                     call(['chmod', '-R', '777', self.folders_listbox.get('active')])
                     self.folders_listbox.delete(0)
                     self.set_of_paths.discard(self.browse)
+                    self.remove_path_from_file()
                     messagebox.showinfo(message='Access granted.')
                 else:
                     messagebox.showinfo(message='Access denied.')
