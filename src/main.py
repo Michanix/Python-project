@@ -12,7 +12,8 @@ from tkinter import filedialog, messagebox
 from takepicture import TakePicture
 from findandrecognize import find_and_recognize
 
-
+# set of directories that already secured
+set_of_paths = set()
 
 class UI:
 
@@ -42,12 +43,7 @@ class UI:
         self.folders_listbox = Listbox(self.mainframe, width=90)
 
         # Buttons
-        self.browse = ttk.Button(
-            self.mainframe, text='Browse...', command=self.get_folder_path)
-        # delete item from list box
-        self.delete_item = ttk.Button(self.mainframe, text='Remove', 
-            command=lambda folders_listbox=self.folders_listbox: folders_listbox.delete(0)
-            )
+        self.browse = ttk.Button(self.mainframe, text='Browse...', command=self.get_folder_path)
         self.lock_btn = ttk.Button(self.mainframe, text='Lock', command=self.lock_directory)
         self.unlock_btn = ttk.Button(self.mainframe, text='Unlock', command=self.unlock_dir)
         # Grigds
@@ -63,7 +59,6 @@ class UI:
         # list box grid
         self.listbox_label.grid(column=1, row=2)
         self.folders_listbox.grid(column=2, row=3)
-        self.delete_item.grid(column=3, row=4)
         
     def close_program(self):
         self.root.destroy()
@@ -71,15 +66,18 @@ class UI:
 
     def get_folder_path(self):
         user_desk = '/home/{}/Desktop'.format(getuser())
-        self.browse = filedialog.askdirectory(
-            initialdir=user_desk, title='Select folder')
+        self.browse = filedialog.askdirectory(initialdir=user_desk, title='Select folder')
         self.folder_entry.delete(0, 'end')
         self.folder_entry.insert(0, self.browse)
-        self.folders_listbox.insert(1, self.browse)
 
     def lock_directory(self):
-        messagebox.showinfo(message='Folder is locked')
-        call(['chmod', '-R', '101', self.folders_listbox.get('active')])
+        if self.browse in set_of_paths:
+            messagebox.showinfo(message='Already in list')
+        else:
+            self.folders_listbox.insert(1, self.browse)
+            messagebox.showinfo(message='Folder is locked')
+            call(['chmod', '-R', '101', self.folders_listbox.get('active')])
+            set_of_paths.add(self.browse)
 
     def use_existing_image(self):
         path = os.getcwd
@@ -98,6 +96,8 @@ class UI:
             else:
                 if access:
                     call(['chmod', '-R', '777', self.folders_listbox.get('active')])
+                    self.folders_listbox.delete(0)
+                    set_of_paths.discard(self.browse)
                     messagebox.showinfo(message='Access granted.')
                 else:
                     messagebox.showinfo(message='Access denied.')
@@ -109,6 +109,8 @@ class UI:
             else:
                 if access:
                     call(['chmod', '-R', '777', self.folders_listbox.get('active')])
+                    self.folders_listbox.delete(0)
+                    set_of_paths.discard(self.browse)
                     messagebox.showinfo(message='Access granted.')
                 else:
                     messagebox.showinfo(message='Access denied.')
