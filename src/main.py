@@ -14,16 +14,19 @@ from findandrecognize import find_and_recognize
 
 # set of directories that already secured
 
+
 def get_paths_from_dir():
     with open('paths.txt', 'r') as f:
         data = f.readlines()
     return data
+
 
 def write_path_to_file(path):
     # writing paths to file
     path_to_save = os.path.join(os.getcwd(), 'paths.txt')
     with open(path_to_save, 'a+') as f:
         f.write(path + '\n')
+
 
 def remove_paths(path):
     data = get_paths_from_dir()
@@ -32,6 +35,7 @@ def remove_paths(path):
     with open('paths.txt', 'w+') as f:
         for p in data:
             f.write(p + '\n')
+
 
 class UI:
 
@@ -149,7 +153,11 @@ class UI:
                     messagebox.showinfo(message='Access granted.')
                 else:
                     messagebox.showinfo(message='Access denied.')
-        remove_paths(active_item)
+        try:
+            remove_paths(active_item)
+        except:
+            pass
+
 
 if __name__ == '__main__':
     print('Start programm...')
