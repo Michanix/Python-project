@@ -13,7 +13,6 @@ from takepicture import TakePicture
 from findandrecognize import find_and_recognize
 
 # set of directories that already secured
-set_of_paths = set()
 
 class UI:
 
@@ -21,13 +20,14 @@ class UI:
         self.root = Tk()
         self.root.title("Folder security")
         self.path_to_image = []
-
+        self.set_of_paths = set()
+        
         # Main window
         self.mainframe = ttk.Frame(
             self.root, padding="4 4 12 12", width=480, height=320)
-        self.mainframe.grid(column=0, row=0)
-        self.root.columnconfigure(0, weight=1)
-        self.root.rowconfigure(0, weight=1)
+        self.mainframe.pack()
+        #self.root.columnconfigure(0, weight=1)
+        #self.root.rowconfigure(0, weight=1)
         # menu bar
         menubar = Menu(self.root)
         menubar.add_command(label='Take picture', command=TakePicture)
@@ -38,9 +38,9 @@ class UI:
         self.folder_label = ttk.Label(self.mainframe, text='Choose folder:', font=16)
         self.listbox_label = ttk.Label(self.mainframe, text='List of secured folder:', font=16)
         # Entries
-        self.folder_entry = ttk.Entry(self.mainframe, width=90, text='')
+        self.folder_entry = ttk.Entry(self.mainframe, width=90, text='', background='white')
         # List box
-        self.folders_listbox = Listbox(self.mainframe, width=90)
+        self.folders_listbox = Listbox(self.mainframe, width=90, background='white')
 
         # Buttons
         self.browse = ttk.Button(self.mainframe, text='Browse...', command=self.get_folder_path)
@@ -62,7 +62,6 @@ class UI:
         
     def close_program(self):
         self.root.destroy()
-        print('Terminated.')
 
     def get_folder_path(self):
         user_desk = '/home/{}/Desktop'.format(getuser())
@@ -70,14 +69,20 @@ class UI:
         self.folder_entry.delete(0, 'end')
         self.folder_entry.insert(0, self.browse)
 
+    def write_paths_to_file(self):
+        path_to_save = os.path.join(os.getcwd(), 'paths.txt')
+        with open(path_to_save, 'w') as f:
+            f.write(self.browse)
+
     def lock_directory(self):
-        if self.browse in set_of_paths:
+        if self.browse in self.set_of_paths:
             messagebox.showinfo(message='Already in list')
         else:
             self.folders_listbox.insert(1, self.browse)
             messagebox.showinfo(message='Folder is locked')
             call(['chmod', '-R', '101', self.folders_listbox.get('active')])
-            set_of_paths.add(self.browse)
+            self.set_of_paths.add(self.browse)
+            self.write_paths_to_file()
 
     def use_existing_image(self):
         path = os.getcwd
@@ -97,7 +102,7 @@ class UI:
                 if access:
                     call(['chmod', '-R', '777', self.folders_listbox.get('active')])
                     self.folders_listbox.delete(0)
-                    set_of_paths.discard(self.browse)
+                    self.set_of_paths.discard(self.browse)
                     messagebox.showinfo(message='Access granted.')
                 else:
                     messagebox.showinfo(message='Access denied.')
@@ -110,7 +115,7 @@ class UI:
                 if access:
                     call(['chmod', '-R', '777', self.folders_listbox.get('active')])
                     self.folders_listbox.delete(0)
-                    set_of_paths.discard(self.browse)
+                    self.set_of_paths.discard(self.browse)
                     messagebox.showinfo(message='Access granted.')
                 else:
                     messagebox.showinfo(message='Access denied.')
