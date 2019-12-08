@@ -1,0 +1,10 @@
+1) Take picture - Use this option, if you do not have any picture of 
+yourself currently saved on the computer.
+This fucntion will take picture of you, create 'image/face.jpg' folder and save image there.
+
+2) Use existing picture - Use this option, if you have any picture of yourself on the computer.
+
+3) Choose a folder that you would like to secure by click on the 'Browse' button. 
+Then click 'Lock' button, to put lock on the folder.
+This option will change the ownership of the folder and 
+will allow to open this folder only with 'Unlock' command.

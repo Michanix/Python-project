@@ -1,15 +1,16 @@
 # import only neccessary stuff
 import os
-from getpass import getuser  # to username that currently logged in
+from getpass import getuser  # get username that currently logged in
 from subprocess import call
 
 from tkinter import Tk
-from tkinter import ttk, Listbox, Menu
+from tkinter import ttk, Listbox, Menu, Toplevel
 from tkinter import filedialog, messagebox
 
 # my imports
 #from controllers import use_existing_image, unlock
 from takepicture import TakePicture
+from helppage import HelpPage
 from findandrecognize import find_and_recognize
 
 # get all secured paths from file paths.txt
@@ -35,7 +36,7 @@ def remove_paths(path):
             f.write(p + '\n')
 
 
-class UI:
+class MainPage:
 
     def __init__(self):
         self.root = Tk()
@@ -51,7 +52,9 @@ class UI:
         menubar.add_command(label='Use existing image',
                             command=self.use_existing_image)
         menubar.add_command(label='Exit', command=self.close_program)
+        menubar.add_command(label='Help', command=HelpPage)
         self.root.config(menu=menubar)
+
         # Labels
         self.folder_label = ttk.Label(
             self.mainframe, text='Choose folder:', font=16)
@@ -159,9 +162,8 @@ class UI:
         except:
             pass
 
-
 if __name__ == '__main__':
     print('Start programm...')
-    main = UI()
+    main = MainPage()
     main.root.mainloop()
     print('Terminated.')
