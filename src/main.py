@@ -12,22 +12,20 @@ from tkinter import filedialog, messagebox
 from takepicture import TakePicture
 from findandrecognize import find_and_recognize
 
-# set of directories that already secured
-
-
+# get all secured paths from file paths.txt
 def get_paths_from_dir():
     with open('paths.txt', 'r') as f:
         data = f.readlines()
     return data
 
-
+# append new secured paths to paths.txt
 def write_path_to_file(path):
     # writing paths to file
     path_to_save = os.path.join(os.getcwd(), 'paths.txt')
     with open(path_to_save, 'a+') as f:
         f.write(path + '\n')
 
-
+# remove unlocked paths
 def remove_paths(path):
     data = get_paths_from_dir()
     data = [i.strip('\n') for i in data]
@@ -48,7 +46,7 @@ class UI:
             self.root, padding="4 4 12 12", width=480, height=320)
         self.mainframe.pack()
         # menu bar
-        menubar = Menu(self.root)
+        menubar = Menu(self.root, background='orange')
         menubar.add_command(label='Take picture', command=TakePicture)
         menubar.add_command(label='Use existing image',
                             command=self.use_existing_image)
@@ -61,10 +59,10 @@ class UI:
             self.mainframe, text='List of secured folder:', font=16)
         # Entries
         self.folder_entry = ttk.Entry(
-            self.mainframe, width=90, text='', background='white')
+            self.mainframe, width=50, text='', background='white')
         # List box
         self.folders_listbox = Listbox(
-            self.mainframe, width=90, background='white')
+            self.mainframe, width=50, background='white')
         self.data = get_paths_from_dir()
         for path in self.data:
             self.folders_listbox.insert(1, path.strip('\n'))
