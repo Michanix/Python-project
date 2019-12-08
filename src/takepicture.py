@@ -30,7 +30,7 @@ class TakePicture:
             self.root, text="Cheese!", command=self.take_snapshot)
         take_image_btn.grid(column=0, row=2, pady=5)
         # exit / cancel
-        cancel_btn = ttk.Button(self.root, text="Cancel",
+        cancel_btn = ttk.Button(self.root, text="Exit",
                                 command=self.destructor)
         cancel_btn.grid(column=1, row=2, pady=5)
 
