@@ -91,6 +91,7 @@ class UI:
 
     def close_program(self):
         self.root.destroy()
+        print('Terminated.')
 
     def get_folder_path(self):
         user_desk = '/home/{}/Desktop'.format(getuser())
@@ -115,6 +116,8 @@ class UI:
         else:
             self.folders_listbox.insert(0, active_path)
             messagebox.showinfo(message='Folder is locked')
+            # applying only read and execute permission
+            # thus we can still see directory, but actions permitted
             call(['chmod', '-R', '101', active_path])
             write_path_to_file(active_path)
 
@@ -126,9 +129,14 @@ class UI:
         image_path = os.path.realpath(image)
         self.path_to_image.append(image_path)
 
+    def apply_changes(self, active_item):
+        # gives back full control of directory
+        call(['chmod', '-R', '777', active_item])
+        self.folders_listbox.delete('active')
+        messagebox.showinfo(message='Access granted.')
+
     def unlock_dir(self):
         active_item = self.folders_listbox.get('active')
-        print(active_item)
         if len(self.path_to_image) == 0:
             try:
                 access = find_and_recognize()
@@ -136,9 +144,7 @@ class UI:
                 messagebox.showinfo(message=err)
             else:
                 if access:
-                    call(['chmod', '-R', '777', active_item])
-                    self.folders_listbox.delete('active')
-                    messagebox.showinfo(message='Access granted.')
+                    self.apply_changes(active_item)
                 else:
                     messagebox.showinfo(message='Access denied.')
         else:
@@ -148,9 +154,7 @@ class UI:
                 messagebox.showinfo(message=err)
             else:
                 if access:
-                    call(['chmod', '-R', '777', active_item])
-                    self.folders_listbox.delete('active')
-                    messagebox.showinfo(message='Access granted.')
+                    self.apply_changes(active_item)
                 else:
                     messagebox.showinfo(message='Access denied.')
         try:
