@@ -53,6 +53,9 @@ class UI:
         self.delete_item = ttk.Button(self.mainframe, text='Remove', 
             command=lambda folders_listbox=self.folders_listbox: folders_listbox.delete(0)
             )
+        self.lock_btn = ttk.Button(self.mainframe, text='Lock',
+            command=lambda folders_listbox=self.folders_listbox: folders_listbox.insert(1, self.browse)
+            )
         # Grigds
         # folder grid
         self.folder_label.grid(column=1, row=1)
@@ -60,15 +63,17 @@ class UI:
         # browser button grid
         self.browse.grid(column=3, row=1, padx=10, pady=10)
         # use existing image grid
-        self.upload_image_btn.grid(column=1, row=2)
+        self.upload_image_btn.grid(column=1, row=3)
         # take picture grid
         self.take_pic_btn.grid(column=1, row=3, padx=10, pady=10)
         # test button grid
         self.test_btn.grid(column=1, row=4)
+        # lock button grid
+        self.lock_btn.grid(column=2, row=2)
         # exit button
         self.exit_btn.grid(column=1, row=5, padx=10, pady=10)
         # list box grid
-        self.listbox_label.grid(column=2, row=2)
+        self.listbox_label.grid(column=1, row=2)
         self.folders_listbox.grid(column=2, row=3)
         self.delete_item.grid(column=2, row=4)
         
@@ -82,7 +87,6 @@ class UI:
             initialdir=user_desk, title='Select folder')
         self.folder_entry.delete(0, 'end')
         self.folder_entry.insert(0, self.browse)
-        self.folders_listbox.insert(1, self.browse)
 
 print('Start programm...')
 main = UI()
