@@ -91,7 +91,6 @@ class UI:
 
     def close_program(self):
         self.root.destroy()
-        print('Terminated.')
 
     def get_folder_path(self):
         user_desk = '/home/{}/Desktop'.format(getuser())
@@ -167,3 +166,4 @@ if __name__ == '__main__':
     print('Start programm...')
     main = UI()
     main.root.mainloop()
+    print('Terminated.')
