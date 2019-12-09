@@ -14,12 +14,16 @@ from helppage import HelpPage
 from findandrecognize import find_and_recognize
 
 # get all secured paths from file paths.txt
+
+
 def get_paths_from_dir():
     with open('paths.txt', 'r') as f:
         data = f.readlines()
     return data
 
 # append new secured paths to paths.txt
+
+
 def write_path_to_file(path):
     # writing paths to file
     path_to_save = os.path.join(os.getcwd(), 'paths.txt')
@@ -27,6 +31,8 @@ def write_path_to_file(path):
         f.write(path + '\n')
 
 # remove unlocked paths
+
+
 def remove_paths(path):
     data = get_paths_from_dir()
     data = [i.strip('\n') for i in data]
@@ -162,6 +168,7 @@ class MainPage:
             remove_paths(active_item)
         except:
             pass
+
 
 if __name__ == '__main__':
     print('Start programm...')
