@@ -4,7 +4,7 @@ from getpass import getuser  # get username that currently logged in
 from subprocess import call
 
 from tkinter import Tk
-from tkinter import ttk, Listbox, Menu, Toplevel
+from tkinter import ttk, Listbox, Menu
 from tkinter import filedialog, messagebox
 
 # my imports
@@ -42,6 +42,7 @@ class MainPage:
         self.root = Tk()
         self.root.title("Folder security")
         self.path_to_image = []
+
         # Main window
         self.mainframe = ttk.Frame(
             self.root, padding="4 4 12 12", width=480, height=320)
@@ -56,9 +57,9 @@ class MainPage:
         self.root.config(menu=menubar)
 
         # Labels
-        self.folder_label = ttk.Label(
+        folder_label = ttk.Label(
             self.mainframe, text='Choose folder:', font=16)
-        self.listbox_label = ttk.Label(
+        listbox_label = ttk.Label(
             self.mainframe, text='List of secured folder:', font=16)
         # Entries
         self.folder_entry = ttk.Entry(
@@ -72,22 +73,22 @@ class MainPage:
         # Buttons
         self.browse = ttk.Button(
             self.mainframe, text='Browse...', command=self.get_folder_path)
-        self.lock_btn = ttk.Button(
+        lock_btn = ttk.Button(
             self.mainframe, text='Lock', command=self.lock_directory)
-        self.unlock_btn = ttk.Button(
+        unlock_btn = ttk.Button(
             self.mainframe, text='Unlock', command=self.unlock_dir)
         # Grigds
         # folder grid
-        self.folder_label.grid(column=1, row=1)
+        folder_label.grid(column=1, row=1)
         self.folder_entry.grid(column=2, row=1)
         # browser button grid
         self.browse.grid(column=3, row=1, padx=10, pady=10)
         # lock button grid
-        self.lock_btn.grid(column=3, row=2)
+        lock_btn.grid(column=3, row=2)
         # unlock
-        self.unlock_btn.grid(column=3, row=3)
+        unlock_btn.grid(column=3, row=3)
         # list box grid
-        self.listbox_label.grid(column=1, row=2)
+        listbox_label.grid(column=1, row=2)
         self.folders_listbox.grid(column=2, row=3)
 
     def close_program(self):
