@@ -2,7 +2,7 @@
 
 <h2>Requirements:</h2>
 
-<li>python 3.6+</li>
+<li>python 3.4+</li>
 <li>Linux or Mac(face_recognition library may not work correctly on Windows)</li>
 <li>Web camera</li>
 
