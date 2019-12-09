@@ -1,5 +1,5 @@
 <h2>Python project for Computer Programming course</h2>
-
+<p>This small programm allow users capture image of their face and later use it to unlock/lock files</p>
 <h2>Requirements:</h2>
 
 <li>python 3.4+</li>
