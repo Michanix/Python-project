@@ -17,6 +17,9 @@ from findandrecognize import find_and_recognize
 
 
 def get_paths_from_dir():
+    if not os.path.exists('paths.txt'):
+        with open('paths.txt', 'w') as f:
+            f.write('')
     with open('paths.txt', 'r') as f:
         data = f.readlines()
     return data
